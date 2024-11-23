@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloaded File</title>
+</head>
+<body>
+    <h1>Downloaded File</h1>
+    <p id="file-path"></p>
+    <button id="open-file">Open File</button>
+
+    <script>
+        const { ipcRenderer, shell } = require("electron");
+
+        ipcRenderer.on("display-file", (event, filePath) => {
+            document.getElementById("file-path").textContent = filePath;
+
+            document.getElementById("open-file").addEventListener("click", () => {
+                shell.openPath(filePath);
+            });
+        });
+    </script>
+</body>
+</html>
